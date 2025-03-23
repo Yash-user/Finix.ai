@@ -165,8 +165,10 @@ class LandingPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 20,
+                    runSpacing: 20,
                     children: [
                       _buildFeatureCard(
                         icon: Icons.security,
