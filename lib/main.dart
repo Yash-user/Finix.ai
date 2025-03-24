@@ -55,6 +55,7 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -76,7 +77,7 @@ class LandingPage extends StatelessWidget {
           children: [
             // Hero Section
             Container(
-              height: 600,
+              height: screenHeight,
               width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
