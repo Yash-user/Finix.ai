@@ -1,12 +1,16 @@
+from fastapi import FastAPI, HTTPException
 from newsapi import NewsApiClient
 from dotenv import load_dotenv
 import os
+from google import genai
 
 load_dotenv()
 
+app = FastAPI()
+
 api_key = os.getenv('NEWS_API_KEY')
 newsapi = NewsApiClient(api_key=api_key)
-
+client = genai.Client()
 def fetch_news(query=None, 
                sources=None, 
                category=None, 
@@ -48,3 +52,46 @@ def fetch_news(query=None,
         print(f"An error occurred: {e}")
         return None
 
+# @app.post("/sentiment")
+# async 
+def sentiment_response():
+    query = "stockmarket"
+    news_response = fetch_news(query=query, fetch_type="everything")
+
+    if news_response is None:
+        raise HTTPException(status_code=500, detail="Failed to fetch news data.")
+
+    articles = news_response["articles"]
+    print("Articles Content:", articles)
+    if not articles:
+        raise HTTPException(status_code=404, detail="No articles found for your query.")
+
+    news_text = "Here are the latest news headlines and descriptions about the stock:\n\n"
+    for article in articles:
+        title = article.get("title", "No Title")
+        description = article.get("description", "No Description")
+        news_text += f"- {title}\n  {description}\n\n"
+
+    prompt = (
+        f"{news_text}"
+        "Please analyze the overall sentiment of the above news and determine whether the stock appears to be a good investment. "
+        "Provide a brief explanation for your conclusion. "
+        "Respond in the format: \n"
+        "Sentiment: [positive/negative/neutral],\n"
+        "Investment Recommendation: [buy/sell/hold],\n"
+        "Explanation: ..."
+    )
+
+    try:
+        response = client.generate_content(
+            model="gemini-1.5-flash",
+            contents=[prompt],
+        )
+
+        if isinstance(response, dict):
+            return {"result": response.get("text", "No response text found.")}
+        else:
+            return {"result": str(response)}
+            
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Gemini API error: {str(e)}")
