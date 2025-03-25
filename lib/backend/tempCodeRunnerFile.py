@@ -1,0 +1,1 @@
+etch_news(query=query, fetch_type="sources")
