@@ -3,14 +3,14 @@ from newsapi import NewsApiClient
 from dotenv import load_dotenv
 import os
 from google import genai
-
+from openai import OpenAI
 load_dotenv()
 
 app = FastAPI()
 
 api_key = os.getenv('NEWS_API_KEY')
 newsapi = NewsApiClient(api_key=api_key)
-client = genai.Client()
+openai = OpenAI()
 def fetch_news(query=None, 
                sources=None, 
                category=None, 
@@ -83,15 +83,16 @@ def sentiment_response():
     )
 
     try:
-        response = client.generate_content(
-            model="gemini-1.5-flash",
-            contents=[prompt],
+        response = openai.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+									{"role": "system", "content": "You are a helpful AI assistant."},
+									{"role": "user", "content": prompt}
+            ],
         )
 
-        if isinstance(response, dict):
-            return {"result": response.get("text", "No response text found.")}
-        else:
-            return {"result": str(response)}
+        return response.choices[0].message.content.strip()
             
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Gemini API error: {str(e)}")
+print(sentiment_response())
