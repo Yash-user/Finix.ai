@@ -1,91 +1,93 @@
 import 'package:flutter/material.dart';
 import 'chat_page.dart';
+import 'educate_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool _isDarkMode = false;
-
-  void _toggleTheme() {
-    setState(() {
-      _isDarkMode = !_isDarkMode;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TechFinix',
+      debugShowCheckedModeBanner: false,
+      title: 'Finix.ai',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
-      themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: LandingPage(toggleTheme: _toggleTheme),
+      home: const HomePage(),
     );
   }
 }
 
-class LandingPage extends StatelessWidget {
-  final VoidCallback toggleTheme;
-  
-  const LandingPage({
-    super.key,
-    required this.toggleTheme,
-  });
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Theme.of(context).brightness == Brightness.light
-                  ? Icons.dark_mode
-                  : Icons.light_mode,
+        title: const Text('Finix.ai'),
+        backgroundColor: Colors.grey.shade900,
+        foregroundColor: Colors.white,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.grey.shade900),
+              child: const Text(
+                'Menu',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
             ),
-            onPressed: toggleTheme,
-          ),
-          const SizedBox(width: 16),
-        ],
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.chat),
+              title: const Text('Chat'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ChatPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.school),
+              title: const Text('Educate'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EducatePage()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             // Hero Section
             Container(
-              height: screenHeight,
+              height: MediaQuery.of(context).size.height,
               width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    const Color(0xFF000000),
-                    const Color.fromARGB(255, 0, 0, 0),
+                    Colors.grey.shade900,
+                    Colors.grey.shade700,
                   ],
                 ),
               ),
@@ -93,111 +95,118 @@ class LandingPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'TechFinix',
+                    'Finix',
                     style: TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
                       color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 8),
                   const Text(
-                    'Revolutionizing Financial Technology',
+                    'Financial Technology Solutions',
                     style: TextStyle(
-                      fontSize: 24,
                       color: Colors.white70,
                     ),
                   ),
                   const SizedBox(height: 40),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.blue.shade900,
-                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                        ),
-                        child: const Text(
-                          'Get Started',
-                          style: TextStyle(fontSize: 18),
-                        ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ChatPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.grey.shade900,
+                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      const SizedBox(width: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ChatPage(
-                                toggleTheme: toggleTheme,
-                              ),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                          side: const BorderSide(color: Colors.white),
-                        ),
-                        child: const Text(
-                          'Chat with AI',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
-                    ],
+                    ),
+                    child: const Text(
+                      'Chat with AI',
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
                 ],
               ),
             ),
-            
-            // Features Section
-            Padding(
-              padding: const EdgeInsets.all(40.0),
+
+
+            // Info Section
+            // Info Section
+            Container(
+              height: MediaQuery.of(context).size.height,
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.white,
+                    Colors.white
+                  ],
+                ),
+              ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Why Choose TechFinix?',
+                    'Why Choose Finix.ai?',
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'We provide AI-driven insights to help you make informed financial decisions. '
+                        'From investment strategies to market analysis, our platform is designed to empower you.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black
                     ),
                   ),
                   const SizedBox(height: 40),
                   Wrap(
                     alignment: WrapAlignment.center,
-                    spacing: 20,
-                    runSpacing: 20,
+                    spacing: 40, // Horizontal spacing between cards
+                    runSpacing: 40, // Vertical spacing between rows
                     children: [
                       _buildFeatureCard(
-                        icon: Icons.security,
-                        title: 'Secure',
-                        description: 'Bank-grade security protocols to protect your data',
+                        Icons.analytics,
+                        'Market Insights',
+                        'Get real-time market analysis and trends',
                       ),
                       _buildFeatureCard(
-                        icon: Icons.speed,
-                        title: 'Fast',
-                        description: 'Lightning-fast transactions and real-time processing',
+                        Icons.school,
+                        'Financial Education',
+                        'Learn about investment strategies',
                       ),
                       _buildFeatureCard(
-                        icon: Icons.support_agent,
-                        title: '24/7 Support',
-                        description: 'Round-the-clock customer support for all your needs',
+                        Icons.auto_graph,
+                        'Investment Tips',
+                        'Receive personalized investment advice',
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            
-            // About Section
             Container(
+              height: MediaQuery.of(context).size.height,
+              width: double.infinity,
               padding: const EdgeInsets.all(40.0),
               color: Colors.grey.shade100,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // About Us Section
                   const Text(
                     'About Us',
                     style: TextStyle(
@@ -207,22 +216,17 @@ class LandingPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    'TechFinix is a leading financial technology company dedicated to transforming the way people interact with money. Our innovative solutions empower businesses and individuals to manage their finances more efficiently and securely.',
+                    'Finix.ai is a leading financial technology company dedicated to transforming the way people interact with money. '
+                        'Our innovative solutions empower businesses and individuals to manage their finances more efficiently and securely.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.black87,
                     ),
                   ),
-                ],
-              ),
-            ),
-            
-            // Contact Section
-            Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: Column(
-                children: [
+                  const SizedBox(height: 40),
+
+                  // Contact Section
                   const Text(
                     'Get in Touch',
                     style: TextStyle(
@@ -234,7 +238,7 @@ class LandingPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue.shade900,
+                      backgroundColor: Colors.grey.shade900,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                     ),
@@ -246,45 +250,54 @@ class LandingPage extends StatelessWidget {
                 ],
               ),
             ),
+
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFeatureCard({
-    required IconData icon,
-    required String title,
-    required String description,
-  }) {
-    return Card(
-      elevation: 4,
-      child: Container(
-        width: 300,
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Icon(icon, size: 48, color: Colors.blue.shade900),
-            const SizedBox(height: 16),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+  Widget _buildFeatureCard(IconData icon, String title, String description) {
+    return Container(
+      width: 250, // Fixed width for consistent card sizing
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withValues(alpha: 0.2),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 48, color: Colors.grey.shade900),
+          const SizedBox(height: 16),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 8),
-            Text(
-              description,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey.shade700,
-              ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            description,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey.shade700,
             ),
-          ],
-        ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
 }
+
