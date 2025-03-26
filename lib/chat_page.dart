@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
-  final VoidCallback toggleTheme;
-  
-  const ChatPage({
-    super.key,
-    required this.toggleTheme,
-  });
+  const ChatPage({super.key});
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -56,22 +51,12 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    
     return Scaffold(
+      backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
         title: const Text('AI Assistant'),
-        backgroundColor: isDark ? Colors.grey.shade900 : Colors.blue.shade900,
+        backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
-        actions: [
-          IconButton(
-            icon: Icon(
-              isDark ? Icons.light_mode : Icons.dark_mode,
-            ),
-            onPressed: widget.toggleTheme,
-          ),
-          const SizedBox(width: 16),
-        ],
       ),
       body: Column(
         children: [
@@ -82,46 +67,44 @@ class _ChatPageState extends State<ChatPage> {
               itemCount: _messages.length,
               itemBuilder: (context, index) {
                 final message = _messages[index];
-                return _buildMessage(message, isDark);
+                return _buildMessage(message);
               },
             ),
           ),
-          _buildInputArea(isDark),
+          _buildInputArea(),
         ],
       ),
     );
   }
 
-  Widget _buildMessage(ChatMessage message, bool isDark) {
+  Widget _buildMessage(ChatMessage message) {
     return Align(
       alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: message.isUser 
-              ? (isDark ? Colors.blue.shade700 : Colors.blue.shade900)
-              : (isDark ? Colors.grey.shade800 : Colors.grey.shade200),
+          color: message.isUser ? Colors.blue.shade700 : Colors.grey.shade800,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
           message.text,
-          style: TextStyle(
-            color: message.isUser ? Colors.white : (isDark ? Colors.white : Colors.black87),
+          style: const TextStyle(
+            color: Colors.white,
           ),
         ),
       ),
     );
   }
 
-  Widget _buildInputArea(bool isDark) {
+  Widget _buildInputArea() {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? Colors.grey.shade900 : Colors.white,
+        color: Colors.grey.shade900,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.2),
+            color: Colors.black.withValues(alpha: 0.2),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, -2),
@@ -133,27 +116,34 @@ class _ChatPageState extends State<ChatPage> {
           Expanded(
             child: TextField(
               controller: _messageController,
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Type your message...',
-                border: const OutlineInputBorder(),
-                fillColor: isDark ? Colors.grey.shade800 : Colors.white,
-                filled: true,
-                hintStyle: TextStyle(
-                  color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                hintStyle: TextStyle(color: Colors.grey.shade400),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25),
+                  borderSide: BorderSide(color: Colors.grey.shade700),
                 ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25),
+                  borderSide: BorderSide(color: Colors.grey.shade700),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25),
+                  borderSide: const BorderSide(color: Colors.blue),
+                ),
+                filled: true,
+                fillColor: Colors.grey.shade800,
               ),
               maxLines: null,
               textCapitalization: TextCapitalization.sentences,
-              style: TextStyle(
-                color: isDark ? Colors.white : Colors.black87,
-              ),
             ),
           ),
           const SizedBox(width: 8),
           IconButton(
             onPressed: _sendMessage,
             icon: const Icon(Icons.send),
-            color: isDark ? Colors.blue.shade300 : Colors.blue.shade900,
+            color: Colors.white,
           ),
         ],
       ),
@@ -169,4 +159,4 @@ class ChatMessage {
     required this.text,
     required this.isUser,
   });
-} 
+}
