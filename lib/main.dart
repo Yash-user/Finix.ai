@@ -84,8 +84,8 @@ class LandingPage extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.blue.shade900,
-                    Colors.blue.shade700,
+                    const Color(0xFF000000),
+                    const Color.fromARGB(255, 0, 0, 0),
                   ],
                 ),
               ),
