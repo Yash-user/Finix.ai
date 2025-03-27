@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'chat_page.dart';
 import 'educate_page.dart';
 
-void main() {
+// -- CHANGES MADE BY YASH -- //
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
