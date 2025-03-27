@@ -51,19 +51,18 @@ def get_latest_recommendation(recommendations):
         print(f"Error processing recommendations: {e}")
         return None
 
-if __name__ == "__main__":
-    symbol = "AAPL"  # Replace with your desired stock symbol
-    recommendations = fetch_market_recommendation(symbol)
+# if __name__ == "__main__":
+#     symbol = "AAPL"  # Replace with your desired stock symbol
+#     recommendations = fetch_market_recommendation(symbol)
     
-    if recommendations:
-        latest_recommendation = get_latest_recommendation(recommendations)
-        if latest_recommendation:
-            print(f"Latest market analyst recommendation for {symbol}:")
-            print(latest_recommendation)
-        else:
-            print("Could not determine the latest recommendation.")
-    else:
-        print("No recommendation data retrieved.")
+#     if recommendations:
+#         latest_recommendation = get_latest_recommendation(recommendations)
+#         if latest_recommendation:
+#             print(f"Latest market analyst recommendation for {symbol}: {latest_recommendation}")
+#         else:
+#             print("Could not determine the latest recommendation.")
+#     else:
+#         print("No recommendation data retrieved.")
 
 API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 
@@ -102,13 +101,30 @@ def get_latest_rsi(rsi_data):
         print("Error processing RSI data:", e)
         return None
 
-if __name__ == "__main__":
-    symbol = "AAPL"  # Replace with your desired symbol
+# if __name__ == "__main__":
+#     symbol = "AAPL"  # Replace with your desired symbol
+#     rsi_data = get_rsi(symbol)
+#     latest = get_latest_rsi(rsi_data)
+    
+#     if latest:
+#         date, rsi_value = latest
+#         print(f"Latest RSI for {symbol} on {date} is {rsi_value}")
+#     else:
+#         print("Failed to retrieve the latest RSI data.")
+
+
+def generate_stock_data(symbol):
+
+    res = ""
+
     rsi_data = get_rsi(symbol)
     latest = get_latest_rsi(rsi_data)
-    
-    if latest:
-        date, rsi_value = latest
-        print(f"Latest RSI for {symbol} on {date} is {rsi_value}")
-    else:
-        print("Failed to retrieve the latest RSI data.")
+    date, rsi_value = latest
+    res += f"Latest RSI for {symbol} on {date} is {rsi_value}\n"
+
+    recommendations = fetch_market_recommendation(symbol)
+    latest_recommendation = get_latest_recommendation(recommendations)
+
+    res += f"Latest market analyst recommendation for {symbol}: {latest_recommendation}\n"
+
+    return res
