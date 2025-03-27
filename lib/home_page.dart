@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'chat_page.dart';
 import 'educate_page.dart';
+import 'team_page.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Finix.ai'),
@@ -51,6 +54,16 @@ class HomePage extends StatelessWidget {
                 );
               },
             ),
+            ListTile(
+              leading: const Icon(Icons.group_add),
+              title: const Text('Contact Us'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TeamPage()),
+                );
+              },
+            )
           ],
         ),
       ),
@@ -59,7 +72,7 @@ class HomePage extends StatelessWidget {
           children: [
             // Hero Section
             Container(
-              height: MediaQuery.of(context).size.height,
+              height: screenHeight,
               width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -74,6 +87,20 @@ class HomePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 300, // Adjust height as needed
+                    child: Image.asset(
+                      "assets/images/lightfinixlogo.png",
+                      fit: BoxFit.cover,
+
+                      // errorBuilder: (context, error, stackTrace) {
+                      //   return const Text(
+                      //     "Image not found",
+                      //     style: TextStyle(color: Colors.red),
+                      //   );
+                      // },
+                    ),
+                  ),
                   const Text(
                     'Finix',
                     style: TextStyle(
@@ -118,7 +145,7 @@ class HomePage extends StatelessWidget {
             // Info Section
             // Info Section
             Container(
-              height: MediaQuery.of(context).size.height,
+              height: screenHeight,
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: const BoxDecoration(
@@ -179,7 +206,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height,
+              height: screenHeight,
               width: double.infinity,
               padding: const EdgeInsets.all(40.0),
               color: Colors.grey.shade100,
@@ -216,7 +243,12 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const TeamPage()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey.shade900,
                       foregroundColor: Colors.white,
@@ -238,45 +270,49 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildFeatureCard(IconData icon, String title, String description) {
-    return Container(
-      width: 250, // Fixed width for consistent card sizing
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.2),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 48, color: Colors.grey.shade900),
-          const SizedBox(height: 16),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+    return Builder(
+        builder: (context) {
+          return Container(
+            width: MediaQuery.of(context).size.height,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withValues(alpha: 0.2),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            description,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade700,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, size: 48, color: Colors.grey.shade900),
+                const SizedBox(height: 16),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey.shade700,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
+          );
+        }
     );
   }
 }
