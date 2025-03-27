@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -19,22 +21,45 @@ class _ChatPageState extends State<ChatPage> {
     super.dispose();
   }
 
+  Future<void> _sendMessageToServer(String message) async {
+    final url = Uri.parse('http://127.0.0.1:8000/send-message');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({'message': message}),
+      );
+
+      if (response.statusCode == 200) {
+        // Handle successful response
+        final responseData = json.decode(response.body);
+        print('Response from server: ${responseData['response']}');
+      } else {
+        // Handle error response
+        throw Exception('Failed to send message: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Error sending message: $error');
+    }
+  }
+
   void _sendMessage() {
     if (_messageController.text.trim().isEmpty) return;
 
+    final messageText = _messageController.text;
+
     setState(() {
       _messages.add(ChatMessage(
-        text: _messageController.text,
+        text: messageText,
         isUser: true,
-      ));
-      // Simulate AI response
-      _messages.add(ChatMessage(
-        text: "I'm your AI assistant. How can I help you today?",
-        isUser: false,
       ));
       _messageController.clear();
       _scrollToBottom();
     });
+    _sendMessageToServer(messageText);
   }
 
   void _scrollToBottom() {
