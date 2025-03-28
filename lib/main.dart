@@ -6,17 +6,17 @@ import 'login_page/login_page.dart';
 import 'login_page/registration_page.dart';
 
 void main() {
-  runApp(const FinixApp());
+  runApp(const MyApp());
 }
 
-class FinixApp extends StatelessWidget {
-  const FinixApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Finix',
+      title: 'Finix.ai',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
