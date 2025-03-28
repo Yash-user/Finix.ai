@@ -10,8 +10,8 @@ class Message(BaseModel):
 
 @app.post("/")
 async def send_message(message: Message):
-	response_text = chatbot(message.message)
-	return {"response": response_text}
+    response_text = chatbot(message.message)
+    return {"response": response_text}
 
 if __name__ == "__main__":
-	uvicorn.run(app, host='192.168.1.1', port=8000)
+    uvicorn.run(app, host='192.168.1.1', port=8000)
