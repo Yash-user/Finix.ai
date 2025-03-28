@@ -22,7 +22,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future<void> _sendMessageToServer(String message) async {
-    final url = Uri.parse('http://192.168.1.1:8000');
+    final url = Uri.parse('http://192.168.1.3:8000');
 
     try {
       final response = await http.post(
