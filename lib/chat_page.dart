@@ -22,7 +22,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future<void> _sendMessageToServer(String message) async {
-    final url = Uri.parse('http://192.168.1.1:8000');
+    final url = Uri.parse('http://127.0.0.1:8000/send-message');
 
     try {
       final response = await http.post(
@@ -34,24 +34,15 @@ class _ChatPageState extends State<ChatPage> {
       );
 
       if (response.statusCode == 200) {
+        // Handle successful response
         final responseData = json.decode(response.body);
-        setState(() {
-          _messages.add(ChatMessage(
-            text: responseData['response'],
-            isUser: false,
-          ));
-        });
+        print('Response from server: ${responseData['response']}');
       } else {
         // Handle error response
         throw Exception('Failed to send message: ${response.statusCode}');
       }
     } catch (error) {
-        setState(() {
-          _messages.add(ChatMessage(
-            text: messageText,
-            isUser: true,
-          ));
-        });
+      print('Error sending message: $error');
     }
   }
 
