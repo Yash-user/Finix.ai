@@ -48,7 +48,7 @@ class _ChatPageState extends State<ChatPage> {
     } catch (error) {
         setState(() {
           _messages.add(ChatMessage(
-            text: messageText,
+            text: "Can't Connect to Server",
             isUser: true,
           ));
         });
