@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
     } on FirebaseAuthException catch (e) {
       setState(() {
-        // Update the error message as per the exception
+        // Update the error message as per the current exception
         if (e.code == 'user-not-found' || e.code == 'wrong-password') {
           errorMessage = 'Invalid username or password. Please try again.';
         } else {
