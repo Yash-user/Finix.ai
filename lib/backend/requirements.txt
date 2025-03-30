@@ -1,3 +1,9 @@
 fastapi
 uvicorn
 pydantic
+dotenv
+google-generativeai
+newsapi-python
+requests
+datetime
+finnhub-python
