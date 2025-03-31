@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Finix.ai'),
+        title: const Text('Finix'),
         backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
       ),
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.school),
-              title: const Text('Educate'),
+              title: const Text('Learn Online'),
               onTap: () {
                 Navigator.push(
                   context,
@@ -85,57 +85,86 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 300, // Adjust height as needed
+                  Container(
+                    margin: const EdgeInsets.only(top: 150, bottom: 20),
+                    height: 200,
                     child: Image.asset(
                       "assets/images/lightfinixlogo.png",
                       fit: BoxFit.cover,
-
-                      // errorBuilder: (context, error, stackTrace) {
-                      //   return const Text(
-                      //     "Image not found",
-                      //     style: TextStyle(color: Colors.red),
-                      //   );
-                      // },
                     ),
                   ),
                   const Text(
                     'Finix',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 24,
+                      fontSize: 50,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 15),
                   const Text(
-                    'Financial Technology Solutions',
+                    'Personal Financial Advisor',
                     style: TextStyle(
-                      color: Colors.white70,
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          color: Colors.white38,
+                          blurRadius: 2.0,
+                          offset: Offset(2.0, 2.0),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 40),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const ChatPage()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.grey.shade900,
-                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ChatPage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.grey.shade900,
+                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          'Explore',
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      'Chat with AI',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                      const SizedBox(width: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ChatPage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.grey.shade900,
+                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          'Advisor',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -162,7 +191,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Why Choose Finix.ai?',
+                    'Why Choose Finix?',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -171,8 +200,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    'We provide AI-driven insights to help you make informed financial decisions. '
-                        'From investment strategies to market analysis, our platform is designed to empower you.',
+                    "We provide AI-driven insights as your personal financial advisor to help you make informed decisions. From investment strategies to market analysis, our platform is designed to empower your financial journey.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 16,
@@ -223,8 +251,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    'Finix.ai is a leading financial technology company dedicated to transforming the way people interact with money. '
-                        'Our innovative solutions empower businesses and individuals to manage their finances more efficiently and securely.',
+                    "Finix was born from a vision to democratize financial expertise through cutting-edge AI technology. We created an intelligent financial advisor that combines comprehensive market analysis with personalized guidance. We believe everyone deserves access to sophisticated investment insights and through Finix, we are transforming how individuals navigate financial markets, making smart investing accessible, transparent, and tailored to your unique goals. Our mission is to empower you to make confident financial decisions that build lasting prosperity.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
