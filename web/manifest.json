@@ -1,6 +1,6 @@
 {
-    "name": "myapp",
-    "short_name": "myapp",
+    "name": "Finix",
+    "short_name": "Finix",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",
