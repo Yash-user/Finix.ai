@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
                     'Finix',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 40,
+                      fontSize: 50,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -108,8 +108,15 @@ class HomePage extends StatelessWidget {
                     'Personal Financial Advisor',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          color: Colors.white38,
+                          blurRadius: 2.0,
+                          offset: Offset(2.0, 2.0),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 40),
@@ -244,8 +251,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    'Finix.ai is a leading financial technology company dedicated to transforming the way people interact with money. '
-                        'Our innovative solutions empower businesses and individuals to manage their finances more efficiently and securely.',
+                    "Finix was born from a vision to democratize financial expertise through cutting-edge AI technology. We created an intelligent financial advisor that combines comprehensive market analysis with personalized guidance. We believe everyone deserves access to sophisticated investment insights and through Finix, we are transforming how individuals navigate financial markets, making smart investing accessible, transparent, and tailored to your unique goals. Our mission is to empower you to make confident financial decisions that build lasting prosperity.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
