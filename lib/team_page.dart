@@ -77,7 +77,7 @@ class TeamPage extends StatelessWidget {
                     'https://github.com/samir0607',
                   ),
                   _buildTeamCard(
-                    'assets/images/NikunjPicture.jpeg',
+                    'assets/images/yashBindal.jpeg',
                     'Yash Bindal',
                     'https://www.linkedin.com/in/yashbindal23/',
                     'https://github.com/Yash-user',
