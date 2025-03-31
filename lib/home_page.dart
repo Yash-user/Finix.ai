@@ -85,57 +85,79 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 300, // Adjust height as needed
+                  Container(
+                    margin: const EdgeInsets.only(top: 150, bottom: 20),
+                    height: 200,
                     child: Image.asset(
                       "assets/images/lightfinixlogo.png",
                       fit: BoxFit.cover,
-
-                      // errorBuilder: (context, error, stackTrace) {
-                      //   return const Text(
-                      //     "Image not found",
-                      //     style: TextStyle(color: Colors.red),
-                      //   );
-                      // },
                     ),
                   ),
                   const Text(
                     'Finix',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 24,
+                      fontSize: 40,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 15),
                   const Text(
-                    'Financial Technology Solutions',
+                    'Personal Financial Advisor',
                     style: TextStyle(
-                      color: Colors.white70,
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 40),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const ChatPage()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.grey.shade900,
-                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ChatPage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.grey.shade900,
+                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          'Explore',
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      'Chat with AI',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                      const SizedBox(width: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ChatPage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.grey.shade900,
+                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          'Advisor',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -162,7 +184,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Why Choose Finix.ai?',
+                    'Why Choose Finix?',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -171,8 +193,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    'We provide AI-driven insights to help you make informed financial decisions. '
-                        'From investment strategies to market analysis, our platform is designed to empower you.',
+                    "We provide AI-driven insights as your personal financial advisor to help you make informed decisions. From investment strategies to market analysis, our platform is designed to empower your financial journey.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 16,
