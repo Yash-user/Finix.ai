@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Finix.ai'),
+        title: const Text('Finix'),
         backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
       ),
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.school),
-              title: const Text('Educate'),
+              title: const Text('Learn Online'),
               onTap: () {
                 Navigator.push(
                   context,
