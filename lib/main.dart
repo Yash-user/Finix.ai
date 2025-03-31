@@ -7,11 +7,11 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(const FinixApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FinixApp extends StatelessWidget {
+  const FinixApp({super.key});
 
   @override
   Widget build(BuildContext context) {
