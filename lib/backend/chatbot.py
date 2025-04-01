@@ -95,5 +95,3 @@ def chatbot(query, category):
         return educator(query)
     else:
         return predictor(query)
-
-print(chatbot("should i buy apple stock", "2"))

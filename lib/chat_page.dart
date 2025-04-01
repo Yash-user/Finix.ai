@@ -4,7 +4,12 @@ import 'dart:convert';
 import 'widgets/app_drawer.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+  final int category;
+
+  const ChatPage({
+    super.key, 
+    required this.category
+  });
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -22,7 +27,7 @@ class _ChatPageState extends State<ChatPage> {
     super.dispose();
   }
 
-  Future<void> _sendMessageToServer(String message, int category) async {
+  Future<void> _sendMessageToServer(String message) async {
     final url = Uri.parse('https://finix-backend.vercel.app/');
 
     try {
@@ -31,7 +36,10 @@ class _ChatPageState extends State<ChatPage> {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: json.encode({'message': message, 'category': category}),
+        body: json.encode({
+          'message': message, 
+          'category': widget.category
+        }),
       );
 
       if (response.statusCode == 200) {
@@ -49,8 +57,8 @@ class _ChatPageState extends State<ChatPage> {
     } catch (error) {
         setState(() {
           _messages.add(ChatMessage(
-            text: "Can't Connect to Server",
-            isUser: true,
+            text: "Hi, How can I help you? You can try asking me about a particular Stock, I can analyze the market for you to help you take the decision.\n If you are trying to know details of other companies that are out of my knowledge right now(I will be updated soon) or you are trying to know about something related to finance. Go to my friend Educator. He knows is like a book that will help you learn\n The best way to get better at finance is to learn and deepen your understanding.",
+            isUser: false,
           ));
         });
     }

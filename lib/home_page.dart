@@ -67,10 +67,9 @@ class HomePage extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          category = 1;
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const ChatPage()),
+                            MaterialPageRoute(builder: (context) => const ChatPage(category: 1)),
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -82,17 +81,16 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         child: const Text(
-                          'Explore',
+                          'Educator',
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
                       const SizedBox(width: 20),
                       ElevatedButton(
                         onPressed: () {
-                          category = 0;
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const ChatPage()),
+                            MaterialPageRoute(builder: (context) => const ChatPage(category: 2)),
                           );
                         },
                         style: ElevatedButton.styleFrom(
