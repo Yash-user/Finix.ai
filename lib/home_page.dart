@@ -1,11 +1,6 @@
-import 'package:finix/login/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 import 'chat_page.dart';
-//import 'educate_page.dart';
-import 'educate_page.dart';
 import 'team_page.dart';
-//import 'profile_page.dart';
 import 'widgets/app_drawer.dart';
 
 
@@ -64,13 +59,6 @@ class HomePage extends StatelessWidget {
                       color: Colors.white,
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      // shadows: [
-                      //   Shadow(
-                      //     color: Colors.white38,
-                      //     blurRadius: 2.0,
-                      //     offset: Offset(2.0, 2.0),
-                      //   ),
-                      // ],
                     ),
                   ),
                   const SizedBox(height: 40),
