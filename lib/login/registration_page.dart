@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
-import 'package:finix/login_page.dart';
+import 'package:finix/login/login_page.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override

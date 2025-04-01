@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../chat_page.dart';
 import '../educate_page.dart';
+import '../login/login_page.dart';
 import '../team_page.dart';
 import '../profile_page.dart';
 import '../home_page.dart';
@@ -71,8 +73,47 @@ class AppDrawer extends StatelessWidget {
               );
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.logout, color: Colors.red),
+            title: const Text(
+              'Logout',
+              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+            ),
+            onTap: () {
+              _logoutConfirmation(context);
+            },
+          ),
         ],
       ),
+    );
+  }
+  void _logoutConfirmation(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Logout Confirmation'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut(); // Sign out from Firebase
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => LoginPage()), // Navigate to LoginPage
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 } 

@@ -1,7 +1,7 @@
+import 'package:finix/login/registration_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
-import 'home_page.dart'; // Import the home page
-import 'registration_page.dart'; // Import the registration page
+import '../home_page.dart'; // Import the home page
 import 'package:google_sign_in/google_sign_in.dart'; // Import Google Sign-In
 
 class LoginPage extends StatefulWidget {

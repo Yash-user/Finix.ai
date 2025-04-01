@@ -1,6 +1,9 @@
+import 'package:finix/login/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 import 'chat_page.dart';
 //import 'educate_page.dart';
+import 'educate_page.dart';
 import 'team_page.dart';
 //import 'profile_page.dart';
 import 'widgets/app_drawer.dart';
@@ -18,7 +21,57 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
       ),
-      drawer: const AppDrawer(),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.grey.shade900),
+              child: const Text(
+                'Menu',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.chat),
+              title: const Text('Chat'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ChatPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.school),
+              title: const Text('Learn Online'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EducatePage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.group_add),
+              title: const Text('Contact Us'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TeamPage()),
+                );
+              },
+            )
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -37,10 +90,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 150, bottom: 20),
+                  SizedBox(
                     height: 200,
                     child: Image.asset(
                       "assets/images/lightfinixlogo.png",
