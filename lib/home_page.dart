@@ -67,6 +67,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         onPressed: () {
+                          category = 1;
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const ChatPage()),
@@ -88,6 +89,7 @@ class HomePage extends StatelessWidget {
                       const SizedBox(width: 20),
                       ElevatedButton(
                         onPressed: () {
+                          category = 0;
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const ChatPage()),
