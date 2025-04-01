@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widgets/app_drawer.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -114,6 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
       ),
+      drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [

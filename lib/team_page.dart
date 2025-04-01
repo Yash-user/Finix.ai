@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'widgets/app_drawer.dart';
 
 class TeamPage extends StatelessWidget {
   const TeamPage({super.key});
@@ -14,11 +15,13 @@ class TeamPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
-        title: const Text('Meet Our Team'),
+        title: const Text('Contact Us'),
         backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
       ),
+      drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [

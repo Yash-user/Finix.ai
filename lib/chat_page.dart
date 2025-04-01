@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'widgets/app_drawer.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -92,6 +93,7 @@ class _ChatPageState extends State<ChatPage> {
         backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
       ),
+      drawer: const AppDrawer(),
       body: Column(
         children: [
           Expanded(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'widgets/app_drawer.dart';
 
 class EducatePage extends StatelessWidget {
   const EducatePage({super.key});
@@ -15,11 +16,13 @@ class EducatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
-        title: const Text('Financial Education'),
+        title: const Text('Learn Online'),
         backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
       ),
+      drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -41,7 +44,7 @@ class EducatePage extends StatelessWidget {
               _buildSection(
                 'Commodities',
                 'Explore the world of commodity trading, from precious metals to agricultural products.',
-                'https://www.youtube.com/embed/0TQ0RBNcgic',
+                'https://youtu.be/EtqVmE2U4Xo?si=mWlg65knWJOZ6mjX',
                 [
                   'Types of commodities (metals, energy, agriculture)',
                   'Factors affecting commodity prices',
@@ -53,7 +56,7 @@ class EducatePage extends StatelessWidget {
               _buildSection(
                 'Futures',
                 'Understanding futures contracts and their role in financial markets.',
-                'https://www.youtube.com/embed/0TQ0RBNcgic',
+                'https://www.youtube.com/playlist?list=PLX2SHiKfualFUupnwJajd2DQhSvvvUwTe',
                 [
                   'What are futures contracts?',
                   'How futures trading works',
@@ -65,7 +68,7 @@ class EducatePage extends StatelessWidget {
               _buildSection(
                 'Options',
                 'Learn about options trading, from basic concepts to advanced strategies.',
-                'https://www.youtube.com/embed/0TQ0RBNcgic',
+                'https://www.youtube.com/playlist?list=PLX2SHiKfualFiusiT9G5uE9jU3vetvW2x',
                 [
                   'Call and put options explained',
                   'Options pricing and Greeks',
