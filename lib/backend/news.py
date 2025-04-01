@@ -57,7 +57,6 @@ def generate_news(query):
     news_response = fetch_news(query=query, fetch_type="everything")
 
     articles = news_response["articles"]
-    print("Articles Content:", articles)
 
     news_text = "Here are the latest news headlines and descriptions about the topic:\n\n"
     for article in articles:

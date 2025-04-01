@@ -22,7 +22,7 @@ class _ChatPageState extends State<ChatPage> {
     super.dispose();
   }
 
-  Future<void> _sendMessageToServer(String message) async {
+  Future<void> _sendMessageToServer(String message, int category) async {
     final url = Uri.parse('https://finix-backend.vercel.app/');
 
     try {
@@ -31,7 +31,7 @@ class _ChatPageState extends State<ChatPage> {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: json.encode({'message': message}),
+        body: json.encode({'message': message, 'category': category}),
       );
 
       if (response.statusCode == 200) {
