@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'chat_page.dart';
-import 'educate_page.dart';
+//import 'educate_page.dart';
 import 'team_page.dart';
-import 'profile_page.dart';
+//import 'profile_page.dart';
 import 'widgets/app_drawer.dart';
 
 
