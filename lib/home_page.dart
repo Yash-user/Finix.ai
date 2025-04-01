@@ -1,8 +1,9 @@
+import 'package:finix/login/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 import 'chat_page.dart';
 import 'educate_page.dart';
 import 'team_page.dart';
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,7 +13,7 @@ class HomePage extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Finix'),
+        title: const Text('Finix.ai'),
         backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
       ),
@@ -46,7 +47,7 @@ class HomePage extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.school),
-              title: const Text('Learn Online'),
+              title: const Text('Educate'),
               onTap: () {
                 Navigator.push(
                   context,
@@ -63,7 +64,17 @@ class HomePage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const TeamPage()),
                 );
               },
-            )
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout, color: Colors.red),
+              title: const Text(
+                'Logout',
+                style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              ),
+              onTap: () {
+                _showLogoutConfirmationDialog(context);
+              },
+            ),
           ],
         ),
       ),
@@ -85,10 +96,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 150, bottom: 20),
+                  SizedBox(
                     height: 200,
                     child: Image.asset(
                       "assets/images/lightfinixlogo.png",
@@ -170,8 +180,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
-
-            // Info Section
             // Info Section
             Container(
               height: screenHeight,
@@ -251,7 +259,8 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    "Finix was born from a vision to democratize financial expertise through cutting-edge AI technology. We created an intelligent financial advisor that combines comprehensive market analysis with personalized guidance. We believe everyone deserves access to sophisticated investment insights and through Finix, we are transforming how individuals navigate financial markets, making smart investing accessible, transparent, and tailored to your unique goals. Our mission is to empower you to make confident financial decisions that build lasting prosperity.",
+                    "Finix.ai is a leading financial technology company dedicated to transforming the way people interact with money. "
+                        "Our innovative solutions empower businesses and individuals to manage their finances more efficiently and securely.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
@@ -289,7 +298,6 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-
           ],
         ),
       ),
@@ -307,7 +315,7 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withValues(alpha: 0.2),
+                  color: Colors.grey.withOpacity(0.2),
                   spreadRadius: 1,
                   blurRadius: 5,
                   offset: const Offset(0, 2),
@@ -340,6 +348,36 @@ class HomePage extends StatelessWidget {
             ),
           );
         }
+    );
+  }
+
+  void _showLogoutConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Logout Confirmation'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut(); // Sign out from Firebase
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => LoginPage()), // Navigate to LoginPage
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
