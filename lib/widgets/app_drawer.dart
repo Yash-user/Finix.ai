@@ -16,11 +16,14 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(color: Colors.grey.shade900),
-            child: const Text(
-              'Menu',
-              style: TextStyle(color: Colors.white, fontSize: 24),
+          SizedBox(
+            height: 180,
+            child: DrawerHeader(
+              decoration: BoxDecoration(color: Colors.grey.shade900),
+              child: const Text(
+                'Menu',
+                style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           ListTile(

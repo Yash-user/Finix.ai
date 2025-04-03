@@ -12,9 +12,16 @@ class HomePage extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Finix'),
+        title: const Text(
+            'Finix',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          )
+        ),
         backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
+
       ),
       drawer: const AppDrawer(),
       body: SingleChildScrollView(

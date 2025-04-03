@@ -97,7 +97,7 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
-        title: const Text('AI Assistant'),
+        title: const Text('Finix AI'),
         backgroundColor: Colors.grey.shade900,
         foregroundColor: Colors.white,
       ),
