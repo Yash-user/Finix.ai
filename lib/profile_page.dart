@@ -11,11 +11,11 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   // Hardcoded user data
   Map<String, String> userData = {
-    'firstName': 'John',
-    'lastName': 'Doe',
-    'phoneNumber': '+1 (555) 123-4567',
-    'age': '28',
-    'country': 'United States',
+    'firstName': 'Arun',
+    'lastName': 'Sharma',
+    'phoneNumber': '+919765548915',
+    'age': '30',
+    'country': 'India',
   };
 
   void _showEditProfileDialog() {
