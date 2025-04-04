@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import 'package:finix/login/login_page.dart';
+import 'package:finix/utils/countrylist.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -13,6 +15,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController countryController = TextEditingController();
+  String? selectedRiskAppetite;
   bool _isPasswordVisible = false; // To toggle password visibility
 
   @override
@@ -36,20 +40,35 @@ class _RegistrationPageState extends State<RegistrationPage> {
               _buildPasswordField(passwordController, 'Password'),
               SizedBox(height: 10),
               _buildTextField(phoneController, 'Phone Number'),
+              SizedBox(height: 10),
+              _buildTextField(countryController, 'Country'),
+              SizedBox(height: 10),
+              _buildRiskAppetiteDropdown(),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
                   String email = emailController.text;
                   String password = passwordController.text;
+                  String country = countryController.text.toLowerCase();
 
                   // Check for empty fields
                   if (firstNameController.text.isEmpty ||
                       lastNameController.text.isEmpty ||
                       email.isEmpty ||
                       password.isEmpty ||
-                      phoneController.text.isEmpty) {
+                      phoneController.text.isEmpty ||
+                      country.isEmpty ||
+                      selectedRiskAppetite == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Please fill in all fields.')),
+                    );
+                    return;
+                  }
+
+                  // Validate country
+                  if (!countries.contains(country)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Please enter a valid country.')),
                     );
                     return;
                   }
@@ -70,7 +89,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     return;
                   }
 
-                  // Call the registerUser  function
+                  // Call the registerUser function
                   await registerUser (email, password, context);
                 },
                 child: Text('Register'),
@@ -141,6 +160,31 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
+  Widget _buildRiskAppetiteDropdown() {
+    return DropdownButtonFormField<String>(
+      value: selectedRiskAppetite,
+      hint: Text('Select Risk Appetite'),
+      items: ['High', 'Medium', 'Low'].map((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      onChanged: (String? newValue) {
+        setState(() {
+          selectedRiskAppetite = newValue;
+        });
+      },
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(color: Colors.blueAccent),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+      ),
+    );
+  }
+
   Future<bool> emailExists(String email) async {
     try {
       final signInMethods = await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
@@ -164,7 +208,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
         password: password,
       );
       // User registered successfully
-      print("User  registered: ${userCredential.user?.uid}");
+      print("User registered: ${userCredential.user?.uid}");
+
+      // Store additional user data in Firestore
+      try {
+        await FirebaseFirestore.instance.collection("finix").add({
+          'first_name': firstNameController.text.trim(),
+          'last_name': lastNameController.text.trim(),
+          'phone': phoneController.text.trim(),
+          'country': countryController.text.trim(),
+          'risk': selectedRiskAppetite,
+        });
+        print("User  data stored in Firestore successfully.");
+      } catch (e) {
+        print("Error storing user data in Firestore: $e");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error storing user data in Firestore: $e')),
+        );
+      }
 
       // Navigate to the login page after successful registration
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
