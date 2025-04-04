@@ -22,7 +22,7 @@ class _ChatPageState extends State<ChatPage> {
   final List<ChatMessage> _messages = [];
   final ScrollController _scrollController = ScrollController();
   bool _showGreeting = true; // State variable to manage greeting visibility
-  var firstName = "Yash"; // Variable to hold the username
+  var firstName = "Arun"; // Variable to hold the username
 
   // @override
   // void initState() {

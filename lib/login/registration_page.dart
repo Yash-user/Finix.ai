@@ -28,8 +28,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: Center( // Center the content
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+          child: Wrap(
+            //mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+            spacing: 10.0, // Horizontal space between items
+            runSpacing: 10.0, // Vertical space between lines
+            alignment: WrapAlignment.center, // Center items horizontally
             children: [
               _buildTextField(firstNameController, 'First Name'),
               SizedBox(height: 10),
