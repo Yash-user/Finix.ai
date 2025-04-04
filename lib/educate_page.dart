@@ -12,7 +12,16 @@ class EducatePage extends StatelessWidget {
       throw 'Could not launch $url';
     }
   }
+  String extractYouTubeVideoId(String url) {
+    final RegExp regex = RegExp(
+      r'(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/|shorts\/|)([A-Za-z0-9_-]{11})',
+      caseSensitive: false,
+      multiLine: false,
+    );
 
+    final match = regex.firstMatch(url);
+    return (match != null && match.groupCount >= 1) ? match.group(1)! : '';
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +65,7 @@ class EducatePage extends StatelessWidget {
               _buildSection(
                 'Futures',
                 'Understanding futures contracts and their role in financial markets.',
-                'https://www.youtube.com/playlist?list=PLX2SHiKfualFUupnwJajd2DQhSvvvUwTe',
+                'https://youtu.be/Mi2DWlR-rP0?si=-HCXrP111EZ9Le1C',
                 [
                   'What are futures contracts?',
                   'How futures trading works',
@@ -68,7 +77,7 @@ class EducatePage extends StatelessWidget {
               _buildSection(
                 'Options',
                 'Learn about options trading, from basic concepts to advanced strategies.',
-                'https://www.youtube.com/playlist?list=PLX2SHiKfualFiusiT9G5uE9jU3vetvW2x',
+                'https://youtu.be/7PM4rNDr4oI?si=yoG3zSM6JSRdpmDO',
                 [
                   'Call and put options explained',
                   'Options pricing and Greeks',
@@ -84,6 +93,10 @@ class EducatePage extends StatelessWidget {
   }
 
   Widget _buildSection(String title, String description, String videoUrl, List<String> keyPoints) {
+    String videoId = extractYouTubeVideoId(videoUrl);
+
+    String thumbnailUrl = 'https://img.youtube.com/vi/$videoId/maxresdefault.jpg';
+
     return Card(
       elevation: 4,
       child: Padding(
@@ -109,17 +122,36 @@ class EducatePage extends StatelessWidget {
             const SizedBox(height: 16),
             AspectRatio(
               aspectRatio: 16 / 9,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Center(
-                  child: IconButton(
-                    icon: const Icon(Icons.play_circle_outline, size: 64),
-                    onPressed: () => _launchURL(videoUrl),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.network(
+                      thumbnailUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey.shade200,
+                          child: const Center(
+                            child: Icon(Icons.error_outline, size: 48),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
+                  Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.5),
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.play_circle_outline, size: 64, color: Colors.white),
+                        onPressed: () => _launchURL(videoUrl),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 16),
