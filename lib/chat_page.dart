@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'widgets/app_drawer.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
-import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
+//import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
+//import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 
 class ChatPage extends StatefulWidget {
   final int category;
@@ -206,7 +206,7 @@ class _ChatPageState extends State<ChatPage> {
         color: Colors.grey.shade900,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withValues(alpha: 0.2),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, -2),
