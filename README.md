@@ -1,16 +1,26 @@
-# myapp
+# FinixAI 📈🤖
 
-A new Flutter project.
+**Your AI-Powered Financial Analyst & Investment Assistant**
 
-## Getting Started
+FinixAI is a personal project that brings intelligent, real-time stock market insights directly to users through a conversational interface. Whether you're tracking stocks, crypto, or forex, FinixAI provides smart summaries, predictive analysis, and live alerts — all powered by AI and real-time data APIs.
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- **Natural Language Interface**: Ask FinixAI financial questions like “Should I invest in Tesla?” or “What’s the forecast for Apple stock?”
+- **Live Market Data**: Real-time price tracking for stocks, crypto, and forex.
+- **Smart Summaries**: AI-generated summaries of company financials, trends, and performance.
+- **Market Alerts**: Get notified of significant price fluctuations or events.
+- **Custom Watchlists**: Track and manage your favorite assets.
+- **Predictive Analysis**: Data-driven AI insights into future performance (experimental).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🛠️ Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Frontend**: React / Rocket.Chat App Interface
+- **Backend**: Python (Serverless functions)
+- **AI Models**: OpenAI (GPT), Local Embedding Models
+- **RAG Workflow**: Retrieval-Augmented Generation with in-memory vector store
+- **Data Sources**: Finnhub, AlphaVantage, NewsAPI, custom scrapers
+
+## 📦 Installation
+
+> **Note**: This project is in development.
