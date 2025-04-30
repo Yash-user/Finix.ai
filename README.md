@@ -17,9 +17,9 @@ FinixAI is a personal project that brings intelligent, real-time stock market in
 
 - **Frontend**: React / Rocket.Chat App Interface
 - **Backend**: Python (Serverless functions)
-- **AI Models**: OpenAI (GPT), Local Embedding Models
+- **AI Models**: gemini-1.5-flash
 - **RAG Workflow**: Retrieval-Augmented Generation with in-memory vector store
-- **Data Sources**: Finnhub, AlphaVantage, NewsAPI, custom scrapers
+- **Data Sources**: Finnhub, AlphaVantage, NewsAPI
 
 ## 📦 Installation
 
